@@ -24,6 +24,6 @@ EXPOSE 4000
 
 ENV REPLACE_OS_VARS=true
 
-ENTRYPOINT ["/opt/app/_build/prod/rel/poc_cowboy_oc"]
+ENTRYPOINT ["/opt/app/_build/prod/rel/poc_cowboy_oc/bin/poc_cowboy_oc"]
 
 CMD ["foreground"]
