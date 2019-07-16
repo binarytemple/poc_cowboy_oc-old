@@ -1,5 +1,12 @@
+.dockerignore
+.git
+.gitignore
+.tool-versions
+.travis.yml
 LICENSE
 Makefile
 README.md
 _build
+eflame-export
 ops
+tags

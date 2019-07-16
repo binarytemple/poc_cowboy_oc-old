@@ -6,9 +6,9 @@ RUN curl https://s3.amazonaws.com/rebar3/rebar3 -o /usr/local/bin/rebar3 && chmo
 
 WORKDIR /opt/app
 
-COPY . ./
-
 RUN printf '[url "https://github.com/"] \ninsteadOf = git://github.com/\n[url "https://github.com/"]\ninsteadOf = git@github.com:\n' > /opt/app/.gitconfig
+
+COPY . ./
 
 RUN rebar3 as prod release 
 
