@@ -5,26 +5,23 @@
 -export([code_change/3, handle_call/3, handle_cast/2,
 	 handle_info/2, init/1, terminate/2]).
 
--export([gen_primes/1, sleep/1, start/0]).
+-export([gen_primes/1, start/0]).
 
 %% arbitrarily test the run function
 -export([run/1]).
 
-start() -> gen_server:start(?MODULE, [], []).
+start() -> gen_server:start_link(?MODULE, [], []).
 
-sleep(pid) -> gen_server:call(pid, sleep).
-
-gen_primes(pid) -> gen_server:call(pid, gen_primes).
+gen_primes(Pid) when is_pid(Pid) ->
+    gen_server:cast(Pid, gen_primes).
 
 init(_Args) -> {ok, []}.
 
-handle_call(sleep, _From, State) ->
-    {reply, State, State}.
+handle_call(_, _From, State) -> {reply, State, State}.
 
 handle_cast(gen_primes, State) ->
-    erlang:display("gen_primes"),
-    run(10000000000000000000000000000),
-    {reply, State, State};
+    run(1000000000000000000000000000000000000000000000000000),
+    {noreply, State};
 handle_cast(_Request, State) -> {noreply, State}.
 
 handle_info(_Info, State) -> {noreply, State}.
