@@ -1,8 +1,8 @@
 -module(poc_cowboy_oc).
 
 -export([export_trace/0,
-	 run_eflame_global_calls_plus_new_procs/0,
-	 run_eflame_global_calls_plus_new_procs/1,
+	 global_and_local_calls_plus_new_procs/0,
+	 global_and_local_calls_plus_new_procs/1,
 	 spawn_lots/0]).
 
 -define(OUTDIR, "/eflame-export/").
@@ -36,15 +36,15 @@ file_timestamp() ->
     io_lib:format("~p-~p-~p-~p-~p-~p",
 		  [Y, Mo, D, H, Mi, S]).
 
-run_eflame_global_calls_plus_new_procs() ->
+global_and_local_calls_plus_new_procs() ->
     io:format("Tracing started...\n"),
-    run_eflame_global_calls_plus_new_procs(20 * 1000).
+    global_and_local_calls_plus_new_procs(20 * 1000).
 
-run_eflame_global_calls_plus_new_procs(Milliseconds) ->
+global_and_local_calls_plus_new_procs(Milliseconds) ->
     spawn(fun () ->
 		  io:format("Tracing started... outfile: ~p \n",
 			    [?TRACE_OUTFILE]),
-		  eflame2:write_trace_exp(global_and_local_calls_plus_new_procs,
+		  eflame2:write_trace_exp(global_calls_plus_new_procs,
 					  ?TRACE_OUTFILE, all, Milliseconds),
 		  io:format("Tracing finished!\n")
 	  end).

@@ -13,5 +13,7 @@ export:
 	docker kill eflame-exporter
 
 flame: export
-	ls -t1 ./eflame-export/*.flame |  head -n 1 | xargs _build/default/lib/eflame/flamegraph.pl > flamegraph.svg
+	ls -t1 ./eflame-export/*.flame |  head -n 1 | xargs sed -e '/SLEEP/{d;}' | _build/default/lib/eflame/flamegraph.pl - > flamegraph.svg
 
+open: flame
+	open ./flamegraph.svg

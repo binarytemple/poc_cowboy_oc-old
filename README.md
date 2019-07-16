@@ -5,7 +5,7 @@ make run`
 ```
 
 ```erlang
-poc_cowboy_oc:run_eflame_global_calls_plus_new_procs(),  poc_cowboy_oc:spawn_lots().  
+poc_cowboy_oc:global_and_local_calls_plus_new_procs(),  poc_cowboy_oc:spawn_lots().  
 ```
 
 Wait 10 seconds..
