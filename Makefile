@@ -8,6 +8,10 @@ push: build
 	docker push bryanhuntesl/poc_cowboy_oc:latest
 
 export: 
-	docker run --rm -d --name=eflame-exporter -v eflame_export:/eflame-export alpine:latest /usr/bin/tail -f /dev/null
-	docker cp exporter:/eflame-export .
+	docker run --rm -d --name=eflame-exporter -v eflame_export:/eflame-export alpine:latest /usr/bin/tail -f /dev/null > /dev/null || true
+	docker cp eflame-exporter:/eflame-export .
 	docker kill eflame-exporter
+
+flame: export
+	ls -t1 ./eflame-export/*.flame |  head -n 1 | xargs _build/default/lib/eflame/flamegraph.pl > flamegraph.svg
+

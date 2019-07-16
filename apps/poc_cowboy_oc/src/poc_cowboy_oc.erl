@@ -7,17 +7,20 @@
 
 -define(OUTDIR, "/eflame-export/").
 
--define(OUTFILE, (?OUTDIR) ++ "out.trace").
+-define(TRACE_OUTFILE, (?OUTDIR) ++ "out.trace").
 
 spawn_lots() ->
-    lists:foreach(fun (_) ->
+    Pids = lists:map(
+      fun (_) ->
 			  erlang:spawn(poc_cowboy_oc_gen_server, start, [])
-		  end,
-		  lists:seq(1, 10)).
+		  end, 
+    lists:seq(1, 10000)),
+    lists:foreach(fun(P) -> P ! gen_prime end , Pids   )
+		 .
 
 export_trace() ->
-    eflame2:format_trace(?OUTFILE,
-			 (?OUTDIR) ++ file_timestamp()).
+    eflame2:format_trace(?TRACE_OUTFILE,
+			 (?OUTDIR) ++ file_timestamp() ++ ".flame") .
 
 file_timestamp() ->
     {{Y, Mo, D}, {H, Mi, S}} =
@@ -32,8 +35,10 @@ run_eflame_global_calls_plus_new_procs() ->
 run_eflame_global_calls_plus_new_procs(Milliseconds) ->
     spawn(fun () ->
 		  io:format("Tracing started... outfile: ~p \n",
-			    [?OUTFILE]),
+			    [?TRACE_OUTFILE]),
 		  eflame2:write_trace_exp(global_calls_plus_new_procs,
-					  ?OUTFILE, all, Milliseconds),
+					  ?TRACE_OUTFILE, all, Milliseconds),
 		  io:format("Tracing finished!\n")
 	  end).
+
+
