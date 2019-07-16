@@ -8,22 +8,22 @@ WORKDIR /opt/app
 
 RUN printf '[url "https://github.com/"] \ninsteadOf = git://github.com/\n[url "https://github.com/"]\ninsteadOf = git@github.com:\n' > /opt/app/.gitconfig
 
-COPY . ./
+COPY ./rebar.config ./rebar.config
+
+COPY ./rebar.lock ./rebar.lock
+
+RUN rebar3 get-deps && rebar3 compile -d
+
+COPY ./apps ./apps
+
+COPY ./config ./config
 
 RUN rebar3 as prod release 
-
-FROM bitwalker/alpine-erlang:20.0.5
-
-COPY --from=0 /opt/app/_build/prod/rel/poc_cowboy_oc /opt/app/
-
-WORKDIR /opt/app/
-
-RUN apk update && apk add bind-tools
 
 EXPOSE 4000
 
 ENV REPLACE_OS_VARS=true
 
-ENTRYPOINT ["/opt/app/bin/poc_cowboy_oc"]
+ENTRYPOINT ["/opt/app/_build/prod/rel/poc_cowboy_oc"]
 
 CMD ["foreground"]

@@ -6,9 +6,7 @@
 	 spawn_lots/0]).
 
 -define(OUTDIR, "/eflame-export/").
-
 -define(TRACE_OUTFILE, (?OUTDIR) ++ "out.trace").
-
 -define('1_MINUTE',60 * 1000).
 -define(SPAWN_COUNT, 1000).
 
@@ -40,13 +38,13 @@ file_timestamp() ->
 
 run_eflame_global_calls_plus_new_procs() ->
     io:format("Tracing started...\n"),
-    run_eflame_global_calls_plus_new_procs(10 * 1000).
+    run_eflame_global_calls_plus_new_procs(20 * 1000).
 
 run_eflame_global_calls_plus_new_procs(Milliseconds) ->
     spawn(fun () ->
 		  io:format("Tracing started... outfile: ~p \n",
 			    [?TRACE_OUTFILE]),
-		  eflame2:write_trace_exp(global_calls_plus_new_procs,
+		  eflame2:write_trace_exp(global_and_local_calls_plus_new_procs,
 					  ?TRACE_OUTFILE, all, Milliseconds),
 		  io:format("Tracing finished!\n")
 	  end).
