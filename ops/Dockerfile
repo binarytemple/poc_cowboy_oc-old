@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-erlang:20.0.5
+FROM bryanhuntesl/alpine-erlang-fritchie:20.0.5
 
 RUN apk update && apk add curl make g++ git
 
@@ -24,6 +24,6 @@ EXPOSE 4000
 
 ENV REPLACE_OS_VARS=true
 
-ENTRYPOINT ["/opt/app/_build/prod/rel/poc_cowboy_oc/bin/poc_cowboy_oc"]
+ENTRYPOINT ["/opt/app/bin/poc_cowboy_oc"]
 
 CMD ["foreground"]
