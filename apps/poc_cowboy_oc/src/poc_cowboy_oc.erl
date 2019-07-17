@@ -1,7 +1,7 @@
 -module(poc_cowboy_oc).
 
--export([export_trace/0, spawn_lots/0, trace/0,
-	 trace_all/0]).
+-export([export_trace/0, spawn_count/1, spawn_lots/0,
+	 trace/0, trace/2, trace_all/0]).
 
 -define(OUTDIR, "/eflame-export/").
 
@@ -11,9 +11,10 @@
 
 -define(SPAWN_COUNT, 1000).
 
-spawn_lots() ->
-    Pids = [spawn_lots_1(V1)
-	    || V1 <- lists:seq(1, ?SPAWN_COUNT)],
+spawn_lots() -> spawn_count(?SPAWN_COUNT).
+
+spawn_count(Count) ->
+    Pids = [spawn_lots_1(V1) || V1 <- lists:seq(1, Count)],
     lists:foreach(fun (P) ->
 			  poc_cowboy_oc_gen_server:gen_primes(P)
 		  end,
@@ -44,7 +45,7 @@ file_timestamp() ->
     io_lib:format("~p-~p-~p-~p-~p-~p",
 		  [Y, Mo, D, H, Mi, S]).
 
-trace_all() -> trace(all, 20 * 1000).
+trace_all() -> trace([all], 20 * 1000).
 
 trace() ->
     trace(global_and_local_calls_plus_new_procs, 20 * 1000).
