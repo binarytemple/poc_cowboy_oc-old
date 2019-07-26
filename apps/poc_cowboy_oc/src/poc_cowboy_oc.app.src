@@ -9,6 +9,7 @@
     cowboy,
     opencensus,
     mix,
+    prometheus_ex,
     ex_bench
    ]},
   {env,[]},

@@ -13,7 +13,7 @@ COPY ./rebar.config ./rebar.config
 COPY ./rebar.lock ./rebar.lock
 
 # needed for elxir dependency - by default 1.8..
-RUN apk add elixir 
+RUN apk add elixir  && mix local.hex --force && mix local.rebar --force
 
 RUN rebar3 get-deps && rebar3 compile -d
 
@@ -21,7 +21,7 @@ COPY ./apps ./apps
 
 COPY ./config ./config
 
-RUN rebar3 as prod release 
+RUN rebar3 as prod release
 
 EXPOSE 4000
 
