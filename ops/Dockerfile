@@ -12,6 +12,9 @@ COPY ./rebar.config ./rebar.config
 
 COPY ./rebar.lock ./rebar.lock
 
+# needed for elxir dependency - by default 1.8..
+RUN apk add elixir 
+
 RUN rebar3 get-deps && rebar3 compile -d
 
 COPY ./apps ./apps
