@@ -9,7 +9,7 @@ Compiled: No compile time info available
 Object file: /code/bryanhuntesl/poc_cowboy_oc/_build/default/lib/ex_bench/ebin/Elixir.ExBench.Application.beam
 Compiler options:  [dialyzer,no_spawn_compiler_process,from_core,
                     no_auto_import]
-Exports: 
+Exports:
          '__info__'/1
          default_filename/0
          module_info/0
@@ -25,7 +25,7 @@ ok
 ```
 12> 'Elixir.Mix.ProjectStack':start_link([]).
 ```
-or 
+or
 
 ```
 application:ensure_all_started(ex_bench).
@@ -36,7 +36,7 @@ application:ensure_all_started(ex_bench).
 ```
 
 ```
-'Elixir.ExBench.Application':run(). 
+'Elixir.ExBench.Application':run().
 ```
 ```
 16> 'Elixir.ExBench.Application':run().
@@ -53,22 +53,23 @@ application:ensure_all_started(ex_bench).
 
 ```
 
-Or just add the `ex_bench`, `gen_stage`, and `mix` applications to app.src as I've done
+Or just add the `ex_bench`, `prometheus_ex`, and `mix` applications to '<your application>.app.src as shown:
 
 ```
-{application, poc_cowboy_oc,                                                                                                                                                      
- [{description, "POC Cowboy and opencensus"},                                                                                                                                     
-  {vsn, "0.1.0"},                                                                                                                                                                 
-  {registered, []},                                                                                                                                                               
-  {mod, { poc_cowboy_oc_app, []}},                                                                                                                                                
-  {applications,                                                                                                                                                                  
-   [kernel,                                                                                                                                                                       
-    stdlib,                                                                                                                                                                       
-    cowboy,                                                                                                                                                                       
-    opencensus,                                                                                                                                                                   
-    mix,                                                                                                                                                                          
-    ex_bench                                                                                                                                                                      
-   ]}, 
+    {application, poc_cowboy_oc,
+     [{description, "POC Cowboy and opencensus"},
+      {vsn, "0.1.0"},
+      {registered, []},
+      {mod, { poc_cowboy_oc_app, []}},
+      {applications,
+       [kernel,
+        stdlib,
+        cowboy,
+        opencensus,
+        mix,
+        prometheus_ex,
+        ex_bench
+       ]},
 ```
 
 
@@ -79,7 +80,7 @@ make run
 ```
 
 ```erlang
-poc_cowboy_oc:global_and_local_calls_plus_new_procs().  
+poc_cowboy_oc:global_and_local_calls_plus_new_procs().
 ```
 
 Wait until it says it's tracing - then execute
