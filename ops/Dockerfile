@@ -1,4 +1,4 @@
-FROM bryanhuntesl/alpine-erlang:20.3.8.22-fritchies.eflame
+FROM bryanhuntesl/alpine-elixir:1.9.0-fritchies.eflame
 
 RUN apk update && apk add curl make g++ git
 
@@ -13,7 +13,7 @@ COPY ./rebar.config ./rebar.config
 COPY ./rebar.lock ./rebar.lock
 
 # needed for elxir dependency - by default 1.8..
-RUN apk add elixir  && mix local.hex --force && mix local.rebar --force
+RUN mix local.hex --force && mix local.rebar --force
 
 RUN rebar3 get-deps && rebar3 compile -d
 
