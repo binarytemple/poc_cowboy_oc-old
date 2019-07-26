@@ -1,4 +1,4 @@
-FROM bryanhuntesl/alpine-erlang-fritchie:20.0.5
+FROM bryanhuntesl/alpine-erlang:20.3.8.22-fritchies.eflame
 
 RUN apk update && apk add curl make g++ git
 
