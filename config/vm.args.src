@@ -1,5 +1,7 @@
 -name poc_cowboy_oc@127.0.0.1
 
+-pa releases/${REL_VSN}/consolidated
+
 -setcookie erlang
 
 +K true

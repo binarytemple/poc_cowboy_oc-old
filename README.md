@@ -1,7 +1,81 @@
 # `poc_cowboy_oc`
 
+
+```
+1> m('Elixir.ExBench.Application').
+Module: 'Elixir.ExBench.Application'
+MD5: dba342e57dec259c48780aecdc8c37e4
+Compiled: No compile time info available
+Object file: /code/bryanhuntesl/poc_cowboy_oc/_build/default/lib/ex_bench/ebin/Elixir.ExBench.Application.beam
+Compiler options:  [dialyzer,no_spawn_compiler_process,from_core,
+                    no_auto_import]
+Exports: 
+         '__info__'/1
+         default_filename/0
+         module_info/0
+         module_info/1
+         run/0
+         run/1
+         start/2
+         stop/0
+         stop/1
+ok
+```
+
+```
+12> 'Elixir.Mix.ProjectStack':start_link([]).
+```
+or 
+
+```
+application:ensure_all_started(ex_bench).
+```
+
+```
+application:ensure_all_started(ex_bench).
+```
+
+```
+'Elixir.ExBench.Application':run(). 
+```
+```
+16> 'Elixir.ExBench.Application':run().
+{ok,<0.785.0>}
+17> {:test1, {'1', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'2', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'3', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'4', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'5', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'6', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'7', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'8', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+{:test1, {'9', <<7, 166>>, %{}, [], false, %{"x" => "y"}}}
+
+```
+
+Or just add the `ex_bench`, `gen_stage`, and `mix` applications to app.src as I've done
+
+```
+{application, poc_cowboy_oc,                                                                                                                                                      
+ [{description, "POC Cowboy and opencensus"},                                                                                                                                     
+  {vsn, "0.1.0"},                                                                                                                                                                 
+  {registered, []},                                                                                                                                                               
+  {mod, { poc_cowboy_oc_app, []}},                                                                                                                                                
+  {applications,                                                                                                                                                                  
+   [kernel,                                                                                                                                                                       
+    stdlib,                                                                                                                                                                       
+    cowboy,                                                                                                                                                                       
+    opencensus,                                                                                                                                                                   
+    mix,                                                                                                                                                                          
+    ex_bench                                                                                                                                                                      
+   ]}, 
+```
+
+
+
+
 ```bash
-make run`
+make run
 ```
 
 ```erlang
