@@ -1,8 +1,8 @@
-# `poc_cowboy_oc`
+# poc_cowboy_oc
 
-A throwaway project for experimenting with [eflame](https://github.com/bryanhuntesl/poc_cowboy_oc) and [ex_bench](https://github.com/bryanhuntesl/ex_bench).
+A throwaway project for experimenting with [eflame](https://github.com/bryanhuntesl/poc_cowboy_oc) and [ex_bench](https://github.com/bryanhuntesl/ex_bench). The 'oc' suffix is for opencensus - but for now there's very little of that.
 
-It also demonstrates how to include an elixir dependency (:ex_bench) in an Erlang project (hint `rebar3_elixir` plugin). 
+Right now the project primarily demonstrates how to include an elixir dependency (:ex_bench) in an Erlang project (hint `rebar3_elixir` plugin). 
 
 ```bash
 make run
